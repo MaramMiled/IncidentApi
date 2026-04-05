@@ -10,6 +10,8 @@ namespace IncidentAPI_X.Controllers
     {
         private readonly IncidentsDbContext _context;
 
+        private static readonly string[] AllowedSeverities = { "LOW", "MEDIUM", "HIGH", "CRITICAL" };
+        private static readonly string[] AllowedStatuses = { "OPEN", "IN_PROGRESS", "RESOLVED" };
         public IncidentsDbController(IncidentsDbContext context)
         {
             _context = context;
@@ -49,6 +51,18 @@ namespace IncidentAPI_X.Controllers
                 return NotFound("No incidents found with this severity.");
 
             return Ok(incidents);
+        }
+
+        [HttpPost]
+        public IActionResult PostIncident(Incident incident)
+        {
+            incident.Status = "OPEN";
+            incident.CreatedAt = DateTime.Now;
+
+            _context.Incidents.Add(incident);
+            _context.SaveChanges();
+
+            return Ok(incident);
         }
     }
 }
