@@ -1,11 +1,14 @@
-﻿using IncidentAPI_X.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
-public class IncidentsDbContext : DbContext
+namespace IncidentAPI_X.Models   // ✅ stays Models
 {
-    public IncidentsDbContext(DbContextOptions<IncidentsDbContext> options)
-    : base(options)
+    public class IncidentsDbContext : DbContext
     {
+        public IncidentsDbContext(DbContextOptions<IncidentsDbContext> options)
+            : base(options)
+        {
+        }
+
+        public virtual DbSet<Incident> Incidents { get; set; }
     }
-    public virtual DbSet<Incident> Incidents { get; set; }
 }
