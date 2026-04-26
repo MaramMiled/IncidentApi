@@ -18,7 +18,7 @@ namespace AppTests
         [Fact]
         public async Task GetIncidents_ReturnsOk()
         {
-            var response = await _client.GetAsync("/api/IncidentsDb");
+            var response = await _client.GetAsync("/api/IncidentsDb"); dotnet sln Maram.sln list
             response.EnsureSuccessStatusCode();
         }
         [Fact]
